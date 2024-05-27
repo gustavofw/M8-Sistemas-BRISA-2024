@@ -12,12 +12,12 @@ const createChatLi = (message, className) => {
     chatLi.classList.add("chat", className);   
     let chatContent = className === 'outgoing' ? `<p></p>` : `<span class="material-symbols-outlined">smart_toy</span><p></p>`;
     chatLi.innerHTML = chatContent;
-    chatLi.querySelector("p").textContent = message;
+    chatLi.querySelector("p").innerHTML = message;  // Use innerHTML instead of textContent
     return chatLi;
 }
 
 const generateResponse = () => {
-    const message = { text: userMessage };
+    const message = { texto: userMessage };  // Chave 'texto' para coincidir com o backend
     fetch('http://localhost:5000/process_user_input', {
         method: 'POST',
         headers: {
@@ -25,10 +25,23 @@ const generateResponse = () => {
         },
         body: JSON.stringify(message),
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Erro HTTP! status: ${response.status}`);
+        }
+        return response.json();
+    })
     .then(data => {
-        const botResponse = data.response;
-        chatbox.appendChild(createChatLi(botResponse, "incoming"));
+        let botResponse;
+        if (data.respostas && data.respostas.length > 0) {
+            botResponse = data.respostas.join('<br>');
+        } else if (data.mensagem) {
+            botResponse = data.mensagem;
+        } else {
+            botResponse = "Não consegui identificar sua necessidade. Você poderia especificar mais?";
+        }
+        const responseElement = createChatLi(botResponse, "incoming");
+        chatbox.appendChild(responseElement);
         chatbox.scrollTo(0, chatbox.scrollHeight);
     })
     .catch(error => console.error('Erro ao enviar mensagem:', error))
