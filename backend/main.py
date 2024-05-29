@@ -32,9 +32,11 @@ def encontrar_palavra_chave(texto, palavras_chaves):
     for setor, artigos in setores.items():
         for artigo, info in artigos.items():
             artigo_normalizado = normalizar_texto(artigo)
-            artigos_normalizados[artigo_normalizado] = (artigo, info['descricao'], info['link'], setor)
-
-    # Verifica se alguma frase no texto corresponde a um setor ou artigo
+            if artigo_normalizado not in artigos_normalizados:
+                artigos_normalizados[artigo_normalizado] = []
+            artigos_normalizados[artigo_normalizado].append((artigo, info['descricao'], info['link'], setor))
+    
+    # Verifica se alguma palavra ou frase no texto corresponde a um setor ou artigo
     for token in doc:
         token_text = token.text
         # Verifica setores
@@ -42,20 +44,17 @@ def encontrar_palavra_chave(texto, palavras_chaves):
             if setor_normalizado in token_text:
                 resultados['setor'] = setor_original
                 break
-        # Verifica artigos
-        for artigo_normalizado, (artigo, descricao, link, setor) in artigos_normalizados.items():
-            if artigo_normalizado in token_text:
-                resultados['artigos'].append((artigo, descricao, link))
 
-    # Se não encontrou nenhum artigo, tenta encontrar pelo menos o setor
-    if not resultados['artigos'] and resultados['setor']:
-        setor_artigos = setores[resultados['setor']]
-        for artigo, info in setor_artigos.items():
-            artigo_normalizado = normalizar_texto(artigo)
-            if artigo_normalizado in texto_normalizado:
-                resultados['artigos'].append((artigo, info['descricao'], info['link']))
+    # Verifica artigos
+    for artigo_normalizado, infos in artigos_normalizados.items():
+        if artigo_normalizado in texto_normalizado:
+            for artigo, descricao, link, setor in infos:
+                resultados['artigos'].append((artigo, descricao, link))
+                if not resultados['setor']:
+                    resultados['setor'] = setor
 
     return resultados
+
 
 @app.route('/process_user_input', methods=['POST'])
 def process_user_input():
