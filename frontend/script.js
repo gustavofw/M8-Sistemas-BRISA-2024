@@ -32,14 +32,19 @@ const generateResponse = () => {
         return response.json();
     })
     .then(data => {
-        let botResponse;
-        if (data.respostas && data.respostas.length > 0) {
-            botResponse = data.respostas.join('<br>');
+        let botResponse = '';
+
+        if (data.artigos && data.artigos.length > 0) {
+            botResponse += data.mensagem ? data.mensagem + '<br>' : '';
+            botResponse += data.artigos.map(artigo => 
+                `<button class="article-button" onclick="window.open('${artigo.link}', '_blank')">${artigo.nome}</button>`
+            ).join(' ');
         } else if (data.mensagem) {
             botResponse = data.mensagem;
         } else {
             botResponse = "Não consegui identificar sua necessidade. Você poderia especificar mais?";
         }
+
         const responseElement = createChatLi(botResponse, "incoming");
         chatbox.appendChild(responseElement);
         chatbox.scrollTo(0, chatbox.scrollHeight);

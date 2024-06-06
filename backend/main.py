@@ -68,13 +68,18 @@ def process_user_input():
 
     if resultado['artigos']:
         respostas = [
-            f"Artigo: {nome} <a href='{link}' target='_blank'>Clique aqui</a>"
+            {'nome': nome, 'link': link}
             for nome, descricao, link in resultado['artigos']
         ]
-        return jsonify({'respostas': respostas})
+        return jsonify({'artigos': respostas})
     elif resultado['setor']:
-        artigos = ', '.join(palavras_chaves['setores'][resultado['setor']].keys())
-        return jsonify({'mensagem': f"Você mencionou o setor '{resultado['setor']}'. Os tópicos relacionados incluem: {artigos}. Sobre qual você tem dúvidas?"})
+        artigos = [{'nome': nome, 'link': info['link']}
+                   for nome, info in palavras_chaves['setores'][resultado['setor']].items()]
+        return jsonify({
+            'mensagem': f"Você mencionou o setor '{resultado['setor']}'. Os tópicos relacionados incluem:",
+            'setor': resultado['setor'],
+            'artigos': artigos
+        })
     else:
         return jsonify({'mensagem': "Não consegui identificar sua necessidade. Você poderia especificar mais?"})
 
