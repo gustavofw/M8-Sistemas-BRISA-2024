@@ -35,9 +35,9 @@ const generateResponse = () => {
         let botResponse = '';
 
         if (data.artigos && data.artigos.length > 0) {
-            botResponse += data.mensagem ? data.mensagem + '<br>' : '';
+            botResponse += data.mensagem ? data.mensagem + '<br><br>' : '';
             botResponse += data.artigos.map(artigo => 
-                `<button class="article-button" onclick="window.open('${artigo.link}', '_blank')">${artigo.nome}</button>`
+                `<div>&#8226; <a href='${artigo.link}' target='_blank'>${artigo.nome}</a></div>`
             ).join(' ');
         } else if (data.mensagem) {
             botResponse = data.mensagem;

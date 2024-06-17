@@ -71,7 +71,10 @@ def process_user_input():
             {'nome': nome, 'link': link}
             for nome, descricao, link in resultado['artigos']
         ]
-        return jsonify({'artigos': respostas})
+        return jsonify({
+            'mensagem': f"Você mencionou o artigo:",
+            'artigos': respostas
+        })
     elif resultado['setor']:
         artigos = [{'nome': nome, 'link': info['link']}
                    for nome, info in palavras_chaves['setores'][resultado['setor']].items()]
