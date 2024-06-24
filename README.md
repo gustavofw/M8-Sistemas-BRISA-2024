@@ -23,8 +23,5 @@ pip install Unidecode
 - spellchecker: Para correção ortográfica.
 pip install pyspellchecker
 
-- flask-session: Neste caso para armazenar o contador de tentativas.
-pip install Flask-Session
-
 Além disso, você também precisará dos modelos de linguagem do spaCy para o português:
 - python -m spacy download pt_core_news_lg
