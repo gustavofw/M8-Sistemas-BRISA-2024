@@ -1,15 +1,15 @@
 const chatInput = document.querySelector(".chat-input textarea");
 const sendChatBtn = document.querySelector(".chat-input span");
 const chatbox = document.querySelector(".chatbox");
-const chatbotToggler = document.querySelector(".chatbot-toggler")
-const chatbotCloseBtn = document.querySelector(".close-btn")
+const chatbotToggler = document.querySelector(".chatbot-toggler");
+const chatbotCloseBtn = document.querySelector(".close-btn");
 
 let userMessage;
 const inputInitHeight = chatInput.scrollHeight;
 
 const createChatLi = (message, className) => {
     const chatLi = document.createElement("li");
-    chatLi.classList.add("chat", className);   
+    chatLi.classList.add("chat", className);
     let chatContent = className === 'outgoing' ? `<p></p>` : `<span class="material-symbols-outlined">smart_toy</span><p></p>`;
     chatLi.innerHTML = chatContent;
     chatLi.querySelector("p").innerHTML = message;  // Use innerHTML instead of textContent
@@ -36,7 +36,7 @@ const generateResponse = () => {
 
         if (data.artigos && data.artigos.length > 0) {
             botResponse += data.mensagem ? data.mensagem + '<br><br>' : '';
-            botResponse += data.artigos.map(artigo => 
+            botResponse += data.artigos.map(artigo =>
                 `<div>&#8226; <a href='${artigo.link}' target='_blank'>${artigo.nome}</a></div>`
             ).join(' ');
         } else if (data.mensagem) {
@@ -53,11 +53,11 @@ const generateResponse = () => {
     .finally(() => {
         chatbox.scrollTo(0, chatbox.scrollHeight);
     });
-}    
+}
 
 const handleChat = () => {
     userMessage = chatInput.value.trim();
-    if(!userMessage) return;
+    if (!userMessage) return;
     chatInput.value = "";
     chatInput.style.height = `${inputInitHeight}px`;
 
@@ -77,12 +77,16 @@ chatInput.addEventListener("input", () => {
 });
 
 chatInput.addEventListener("keydown", (e) => {
-    if(e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
+    if (e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
         e.preventDefault();
         handleChat();
     }
 });
 
 sendChatBtn.addEventListener("click", handleChat);
+
+// Ao carregar a página, remova a classe 'show-chatbot' para garantir que o chatbot esteja fechado
+document.body.classList.remove("show-chatbot");
+
 chatbotCloseBtn.addEventListener("click", () => document.body.classList.remove("show-chatbot"));
 chatbotToggler.addEventListener("click", () => document.body.classList.toggle("show-chatbot"));
