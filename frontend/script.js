@@ -41,6 +41,13 @@ const generateResponse = () => {
             ).join(' ');
         } else if (data.mensagem) {
             botResponse = data.mensagem;
+            if (data.setores) {
+                botResponse += '<ul>';
+                botResponse += data.setores.map(setor => 
+                    `<li>${setor}</li>`
+                ).join(' ');
+                botResponse += '</ul>';
+            }
         } else {
             botResponse = "Não consegui identificar sua necessidade. Você poderia especificar mais?";
         }
