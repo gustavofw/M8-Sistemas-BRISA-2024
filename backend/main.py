@@ -87,16 +87,20 @@ def process_user_input():
         })
     else:
         tentativas_erradas += 1
-        if tentativas_erradas >= 3:
+        if tentativas_erradas >= 5:
             tentativas_erradas = 0
-            setores = [{'nome': nome} for nome in palavras_chaves['setores']] 
+            return jsonify({
+                'mensagem': 'Não consegui identificar sua necessidade. <a href="https://wa.me/55498005918503" target="_blank">Clique aqui</a> para uma conversa com nosso suporte humanizado.'
+            })
+        elif tentativas_erradas == 4:
+            return jsonify({'mensagem': "Não consegui identificar sua necessidade. Você poderia especificar mais?"})
+        elif tentativas_erradas >= 3:
+            setores = [{'nome': nome} for nome in palavras_chaves['setores']]
             return jsonify({
                 'mensagem': "Não consegui identificar sua necessidade. Aqui estão todos os setores disponíveis:",
                 'setores': [resultado['nome'] for resultado in setores]
             })
         else:
             return jsonify({'mensagem': "Não consegui identificar sua necessidade. Você poderia especificar mais?"})
-
-
 if __name__ == '__main__':
     app.run(debug=True)

@@ -12,7 +12,7 @@ const createChatLi = (message, className) => {
     chatLi.classList.add("chat", className);
     let chatContent = className === 'outgoing' ? `<p></p>` : `<span class="material-symbols-outlined">smart_toy</span><p></p>`;
     chatLi.innerHTML = chatContent;
-    chatLi.querySelector("p").innerHTML = message;  // Use innerHTML instead of textContent
+    chatLi.querySelector("p").innerHTML = message;  
     return chatLi;
 }
 
@@ -42,7 +42,7 @@ const generateResponse = () => {
         } else if (data.mensagem) {
             botResponse = data.mensagem;
             if (data.setores) {
-                botResponse += '<ul>';
+                botResponse += '<ul class="setores-lista">';
                 botResponse += data.setores.map(setor => 
                     `<li>${setor}</li>`
                 ).join(' ');
@@ -92,7 +92,6 @@ chatInput.addEventListener("keydown", (e) => {
 
 sendChatBtn.addEventListener("click", handleChat);
 
-// Ao carregar a página, remova a classe 'show-chatbot' para garantir que o chatbot esteja fechado
 document.body.classList.remove("show-chatbot");
 
 chatbotCloseBtn.addEventListener("click", () => document.body.classList.remove("show-chatbot"));
