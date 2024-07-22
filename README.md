@@ -23,5 +23,7 @@ pip install Unidecode
 - spellchecker: Para correção ortográfica.
 pip install pyspellchecker
 
+- 
+
 Além disso, você também precisará dos modelos de linguagem do spaCy para o português:
 - python -m spacy download pt_core_news_lg
