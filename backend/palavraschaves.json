@@ -16,6 +16,10 @@
             "relatorio de compra agrupado opera\u00e7ao fiscal": {
                 "descricao": "Descri\u00e7\u00e3o para Relat\u00f3rio de compra agrupado Opera\u00e7\u00e3o Fiscal",
                 "link": "https://www.sitecompras.com.br/operacaofiscal"
+            },
+            "novas-compras": {
+                "descricao": "Descri\u00e7\u00e3o para novas compras",
+                "link": "https://www.sitecompras.com.br/novas-compras"
             }
         },
         "estoque": {
@@ -284,6 +288,36 @@
             "demonstrativo icms-sc": {
                 "descricao": "Descri\u00e7\u00e3o para demonstrativo icms-sc",
                 "link": "https://www.sitefinanceiro.com.br/or\u00e7amentocrm/demonstrativoicmssc"
+            }
+        },
+        "financeiro": {
+            "pagamentos": {
+                "descricao": "Descri\u00e7\u00e3o para pagamentos",
+                "link": "https://www.sitefinanceiro.com.br/pagamentos"
+            },
+            "recebimentos": {
+                "descricao": "Descri\u00e7\u00e3o para recebimentos",
+                "link": "https://www.sitefinanceiro.com.br/recebimentos"
+            },
+            "balan\u00e7o": {
+                "descricao": "Descri\u00e7\u00e3o para balan\u00e7o",
+                "link": "https://www.sitefinanceiro.com.br/balanco"
+            },
+            "debitos": {
+                "descricao": "artigo exemplo de debitos",
+                "link": "https://www.sitefinanceiro.com.br/debito"
+            }
+        },
+        "exemplo": {
+            "exemplo": {
+                "descricao": "descricao exemplo",
+                "link": "https://www.sitefinanceiro.com.br/exemplo"
+            }
+        },
+        "ex": {
+            "ex": {
+                "descricao": "ex",
+                "link": "https://www.sitefinanceiro.com.br/ex"
             }
         }
     }

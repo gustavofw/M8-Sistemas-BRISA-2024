@@ -16,5 +16,4 @@ if 'consulta' in dados['setores']['compras']:
         "link": "https://www.sitecompras.com.br/consulta"
     }
 
-
     salvar_palavras_chaves(dados)

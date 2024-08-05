@@ -4,11 +4,31 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import logging
 import json
+import pyodbc
 from unidecode import unidecode
+import os
 
 app = Flask(__name__)
 CORS(app)
 nlp = spacy.load("pt_core_news_lg")
+
+#dados_conexao = (
+#    "Driver = {SQL Server};"
+#    "Server = DESKTOP-QVPI6SK;"
+#    "Database = ChatbotM8;"
+#)
+
+#conexao = pyodbc.connect(dados_conexao)
+
+#cursor = conexao.cursor()
+
+#comando = """ """
+#comando1 = F""" USE INTO Adm()
+#VALUES
+#    ({1}, {2}, {3}) """
+
+#cursor.execute(comando)
+#cursor.commit()
 
 # Configuração do logger
 logging.basicConfig(level=logging.DEBUG)
@@ -17,8 +37,12 @@ logging.basicConfig(level=logging.DEBUG)
 tentativas_erradas = 0
 
 def carregar_palavras_chaves():
-    with open('palavraschaves.json', 'r') as arquivo:
-        return json.load(arquivo)
+    try:
+        with open(os.path.join(os.path.dirname(__file__), 'palavraschaves.json'), 'r') as arquivo:
+            return json.load(arquivo)
+    except FileNotFoundError:
+        app.logger.error('Arquivo palavraschaves.json não encontrado.')
+        return {'setores': {}}
 
 def normalizar_texto(texto):
     return unidecode(texto.lower())
@@ -103,4 +127,4 @@ def process_user_input():
         else:
             return jsonify({'mensagem': "Não consegui identificar sua necessidade. Você poderia especificar mais?"})
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5000)
