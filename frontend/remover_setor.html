@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remover Setores</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styleart.css') }}">
+</head>
+<body>
+    <div class="interfaceadd">
+        <header>
+            <h2>Remover Setor</h2>
+        </header>
+        <form class="adicoes" action="/remover-setor" method="post">
+            <div class="form-group">
+                <label for="setor-id">Selecione o Setor:</label>
+                <select class="form-control" id="setor-id" name="setor-id">
+                    {% for setor in setores %}
+                        <option value="{{ setor[0] }}">{{ setor[1] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-danger">Remover Setor</button>
+        </form>
+    </div>
+</body>
+</html>

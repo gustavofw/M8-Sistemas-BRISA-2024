@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Setor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styleart.css') }}">
+</head>
+<body>
+    <div class="interfaceadd">
+        <header>
+            <h2>Adicionar Setor</h2>
+        </header>
+        <form class="adicoes" action="/setores" method="post">
+            <div class="form-group">
+                <label for="setor-nome">Nome do Setor:</label>
+                <input type="text" class="form-control" id="setor-nome" name="setor-nome">
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar Setor</button>
+        </form>
+    </div>
+</body>
+</html>

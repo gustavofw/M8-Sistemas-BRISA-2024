@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>Interface de Artigos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styleart.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+</head>
+<body>
+    <div class="interfaceadd">
+        <header>
+            <h2>Artigos</h2>
+        </header>
+        <form class="adicoes" action="/add" method="post">
+            <div class="form-group">
+                <label for="setor">Setor:</label>
+                <div class="input-group">
+                    <select class="form-control" id="add-setor" name="setor">
+                        {% for setor in setores %}
+                            <option value="{{ setor[0] }}">{{ setor[1] }}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="buttons">
+                        <a href="/setores" class="btn btn-add">
+                            <span class="material-symbols-outlined">add</span>
+                        </a>
+                        <a href="/editar-setor" class="btn btn-edit">
+                            <span class="material-symbols-outlined">.</span>
+                        </a>
+                        <a href="/remover-setor" class="btn btn-remove">
+                            <span class="material-symbols-outlined">remove</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="artigo">Artigo:</label>
+                <input type="text" class="form-control" id="add-artigo" name="artigo" required>
+            </div>
+            <div class="form-group">
+                <label for="descricao">Descrição:</label>
+                <input type="text" class="form-control" id="add-descricao" name="descricao" required>
+            </div>
+            <div class="form-group">
+                <label for="link">Link:</label>
+                <input type="text" class="form-control" id="add-link" name="link" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+    </div>
+</body>
+</html>
