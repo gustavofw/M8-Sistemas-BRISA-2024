@@ -104,7 +104,7 @@ def add_article():
     atualizar_banco_dados(dados, connection)
     connection.close()
     
-    return jsonify({"message": "Artigo adicionado com sucesso!"})
+    return render_template('interfaceadd.html')
 
 @app.route('/setores', methods=['GET', 'POST'])
 def add_setor():
